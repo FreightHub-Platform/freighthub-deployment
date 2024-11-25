@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  # Caddy Reverse Proxy
+  caddy:
+    build:
+      context: ./caddy
+      dockerfile: Dockerfile
+    image: freighthub-caddy:latest
+    container_name: caddy
+    networks:
+      - freighthub_network
+    ports:
+      - "80:80"
+      - "443:443"
+
+  # Core Backend Service
+  core:
+    build:
+      context: ./freighthub-backend
+      dockerfile: Dockerfile
+    image: freighthub-core:latest
+    container_name: core
+    networks:
+      - freighthub_network
+    ports:
+      - "8081:8081"
+    volumes:
+      - /root/Freighthub/config/core/application.properties:/config/application.properties
+      - /root/Freighthub/config/core/application-secrets.properties:/config/application-secrets.properties
+
+  # Auth Service
+  auth:
+    build:
+      context: ./freighthub-auth-service
+      dockerfile: Dockerfile
+    image: freighthub-auth:latest
+    container_name: auth
+    networks:
+      - freighthub_network
+    ports:
+      - "8080:8080"
+    volumes:
+      - /root/Freighthub/config/auth/application.properties:/config/application.properties
+
+  # Frontend Service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: freighthub-frontend:latest
+    container_name: frontend
+    networks:
+      - freighthub_network
+    ports:
+      - "3000:3000"
+
+networks:
+  freighthub_network:
+    driver: bridge
+
