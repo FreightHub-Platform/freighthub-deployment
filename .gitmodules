@@ -1,0 +1,16 @@
+[submodule "freighthub-auth-service"]
+	path = freighthub-auth-service
+	url = https://github.com/FreightHub-Platform/freighthub-auth-service.git
+	branch = final-deployment
+[submodule "freighthub-backend"]
+	path = freighthub-backend
+	url = https://github.com/FreightHub-Platform/freighthub-backend.git
+	branch = final-deployment
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/FreightHub-Platform/frontend.git
+	branch = final-deployment
+[submodule "mobile-application"]
+	path = mobile-application
+	url = https://github.com/FreightHub-Platform/mobile-application.git
+	branch = main
