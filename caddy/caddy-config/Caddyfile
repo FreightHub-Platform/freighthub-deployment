@@ -1,3 +1,33 @@
-localhost:80 {
-    reverse_proxy  auth:8080
+{
+    email danujayas00@gmail.com
+}
+
+freighthub.danujaya.live, www.freighthub.danujaya.live {
+    reverse_proxy http://frontend:3000
+    tls {
+        on_demand
+    }
+}
+
+# Route requests to the auth service on port 8080
+auth.freighthub.danujaya.live {
+    reverse_proxy http://auth:8080
+    tls {
+        on_demand
+    }
+}
+
+# Route requests to the core backend on port 8081
+api.freighthub.danujaya.live {
+    reverse_proxy http://core:8081
+    tls {
+        on_demand
+    }
+}
+
+grafana.danujaya.live, www.grafana.danujaya.live {
+    reverse_proxy http://grafana:3001
+    tls {
+        on_demand
+    }
 }
