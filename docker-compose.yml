@@ -26,8 +26,8 @@ services:
     ports:
       - "8081:8081"
     volumes:
-      - /root/Freighthub/config/core/application.properties:/config/application.properties
-      - /root/Freighthub/config/core/application-secrets.properties:/config/application-secrets.properties
+      - ./config/core/application.properties:/config/application.properties
+      - ./config/core/application-secrets.properties:/config/application-secrets.properties
 
   # Auth Service
   auth:
@@ -41,7 +41,8 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - /root/Freighthub/config/auth/application.properties:/config/application.properties
+      - ./config/auth/application.properties:/config/application.properties
+      - ./config/auth/application-secrets.properties:/config/application-secrets.properties
 
   # Frontend Service
   frontend:
@@ -54,8 +55,9 @@ services:
       - freighthub_network
     ports:
       - "3000:3000"
+    env_file:
+      - ./config/frontend/.env.local
 
 networks:
   freighthub_network:
     driver: bridge
-

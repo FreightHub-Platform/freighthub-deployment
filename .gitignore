@@ -1,2 +1,3 @@
 config/core/application-secrets.properties
 config/auth/application-secrets.properties
+config/frontend/.env.local
